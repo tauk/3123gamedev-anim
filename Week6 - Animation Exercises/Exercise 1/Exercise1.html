@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+    <body>
+			
+		<h1>Exercise 1</h1>
+        
+        
+        <h3>Q1. Write the code using Canvas API for circles and <i>RequestAnimationFrame</i> to create the following animation.
+        <h3>
+        <p align="center">Note that red and black balls start from center at the bottom and move towards the opposite corners.
+        When they reach the corner they fall back again towards their starting position at the bottom center and then the animation 
+        continues as before. Note that the animation is continuous.</p>
+        
+        <div align="center">
+            <img src = "ex1.gif">
+        </div>
+        
+        <hr />
+        
+        <p></p>
+        
+        <div align="center">
+			<canvas id="canvas1" width="400" height="200" tabindex="0" style=";border:1px solid #000000;">
+			</canvas>
+        </div>
+            
+        <script>
+            var canvas = document.getElementById("canvas1");
+            var ctx = canvas.getContext("2d");
+
+			//Your code goes here ......
+			let requestAnimationFrame = window.requestAnimationFrame ||
+                                        window.mozRequestAnimationFrame ||
+                                        window.webkitRequestAnimationFrame ||
+                                        window.msRequestAnimationFrame;
+			
+			//variables go here....
+
+
+			const delayBetweenFrames = 50;
+			
+			function animate() {
+				setTimeout(()=> {
+					requestAnimationFrame(animate);
+					
+					//clear the canvas
+					ctx.clearRect(0, 0, canvas.width, canvas.height);
+					
+					//add code for the required animation.....
+					
+				}, delayBetweenFrames);
+			}
+			
+			function drawCircle(x, y, radius, color) {
+				ctx.beginPath();
+				ctx.arc(x, y, radius, 0, 2 * Math.PI);
+				ctx.fillStyle = color;
+				ctx.fill();
+			}
+			
+			animate();
+			
+			
+			
+		</script>
+    </body>
+</html>
+        
+        
+        

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+    <body>
+			
+	    <h1>Exercise 2<h1>
+        
+        
+        <h3>Q1. Write the code using Canvas API for circles and <i>RequestAnimationFrame</i> to create the following animation.
+        <h3>
+        
+        <div align="center">
+            <img src = "ex2.gif">
+        </div>
+        
+        <hr />
+        
+        <p></p>
+        
+        <div align="center">
+			<canvas id="canvas1" width="400" height="200" tabindex="0" style=";border:1px solid #000000;">
+			</canvas>
+        </div>
+            
+        <script>
+            let canvas = document.getElementById("canvas1");
+            let ctx = canvas.getContext("2d");
+
+			
+		    //get the animation frame depending on the browser engine
+            let requestAnimationFrame = window.requestAnimationFrame ||
+                                        window.mozRequestAnimationFrame ||
+                                        window.webkitRequestAnimationFrame ||
+                                        window.msRequestAnimationFrame;
+
+            //declare variables here for the ....
+			
+			//animation constants
+            const radius = 10;
+            const delayBetweenFrames = 50; //the delay time is in milliseconds   
+
+            //declare the animate() function
+            function animate() {                
+                //use the setTimeout to do the animation between frame using the delayBetweenFrames
+                setTimeout(function() {
+
+                    //animation code goes into this anonymous function handler
+                    requestAnimationFrame(animate);
+
+                    //clear the whole canvas area   
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    //lots of animation code goes here......
+
+                }, delayBetweenFrames);
+            }
+
+			//function to draw a colored circle
+			function drawCircle(x, y, radius, color) {
+				ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                
+                //fill the circle with color
+                ctx.fillStyle = color;
+                ctx.fill();
+			}
+			
+            //call the animate() function
+            animate();	
+			
+		</script>
+    </body>
+</html>
+        
+        
+        
