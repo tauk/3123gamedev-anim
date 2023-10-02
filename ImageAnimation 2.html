@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+    
+    <html>
+        
+        <body>
+			
+			<h1>Canvas Animation - Moving images on the canvas</h1>
+			
+            <canvas id="canvas1" width="500" height="200" style="border:1px solid #000000;">
+            </canvas>
+            
+            <script>
+                const canvas = document.getElementById("canvas1");
+                const ctx = canvas.getContext("2d");
+                
+				var dukeImage = new Image();
+				dukeImage.src = 'duke0.png';
+				
+				var goRight = true;
+				
+                var imageX = 0;
+                var imageY = 50;
+				
+				let width = 40;
+				let height = 50;
+				
+				
+                const requestAnimationFrame = window.requestAnimationFrame ||
+                                            window.mozRequestAnimationFrame ||
+                                            window.webkitRequestAnimationFrame ||
+                                            window.msRequestAnimationFrame;
+                
+            	const framesPerSecond = 20;
+                
+            	function moveDuke() {
+
+                	setTimeout(function() { //replace with arrow function
+                    	requestAnimationFrame(moveDuke);
+                         
+						//clear the canvas
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+						   
+						// animating/drawing code goes here
+                        if(goRight)
+						  imageX = imageX + 5;
+                        else
+                          imageX = imageX - 5;
+						
+						ctx.drawImage(dukeImage, imageX, imageY, width, height);
+
+                        if (imageX == canvas.width) 
+                            goRight = false;
+                        
+                        if (imageX == 0 && !goRight)
+                            goRight = true;
+                           
+                     }, 1000 / framesPerSecond); //end setTimeout                                     
+            	 }
+            
+            moveDuke();
+     </script>
+            
+            
+        </body>
+        
+    </html>

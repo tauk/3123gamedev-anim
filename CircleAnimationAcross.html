@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+    <body>
+			
+		<h1>Canvas Animation example - moving a circle across the canvas</h1>
+			
+        <canvas id="canvas1" width="400" height="200" style="border:1px solid #000000;">
+        </canvas>
+            
+        <script>
+            var canvas = document.getElementById("canvas1");
+            var ctx = canvas.getContext("2d");
+                
+            //get the animation frame depending on the browser engine
+            var requestAnimationFrame = window.requestAnimationFrame ||
+                                        window.mozRequestAnimationFrame ||
+                                        window.webkitRequestAnimationFrame ||
+                                        window.msRequestAnimationFrame;
+
+            //set intial start x and y coordinates
+            var x = 0;
+            var y = canvas.height / 2;
+            
+            var radius = 10;
+
+            var delayBetweenFrames = 20; //the delay time is in milliseconds   
+
+            //declare the animate() function
+            function animate() {                
+                //use the setTimeout to do the animation between frame using the delayBetweenFrames
+                setTimeout(function() {
+
+                    //animation code goes into this anonymous function handler
+                    requestAnimationFrame(animate);
+
+                    //clear the whole canvas area   
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    //change the x postition
+                    x = x + 10;
+
+                    //also make the circle bigger 
+                    //radius = radius + 2;
+
+                    //draw a circle
+                    ctx.beginPath();
+                    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                
+                    //fill the circle with green color
+                    ctx.fillStyle = "#00FF00";
+                    ctx.fill();
+
+                    if (x == canvas.width) {
+                        x = 0;
+                        radius = 10;
+                    }
+
+                }, delayBetweenFrames);
+            }
+
+            //call the animate() function
+            animate();
+        </script>
+            
+    </body>        
+</html>

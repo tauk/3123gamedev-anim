@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+    <body>
+			
+		<h1>Canvas Animation example - moving a circle across the canvas</h1>
+			
+        <canvas id="canvas1" width="200" height="100" style="border:1px solid #000000;">
+        </canvas>
+            
+        <script>
+            var canvas = document.getElementById("canvas1");
+            var ctx = canvas.getContext("2d");
+                
+            //get the animation frame depending on the browser engine
+            var requestAnimationFrame = window.requestAnimationFrame ||
+                                        window.mozRequestAnimationFrame ||
+                                        window.webkitRequestAnimationFrame ||
+                                        window.msRequestAnimationFrame;
+
+            //set intial start x and y coordinates
+            var x = 0;
+            var y = 50;
+            
+            var radius = 15;
+
+            var goingRight = true;
+
+            //declare the animate() function
+            function animate() {                
+                
+                setTimeout( function() {
+                    requestAnimationFrame(animate); //Recursion
+
+                    //clear the whole canvas area   
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    //change the x postition
+                    if (goingRight)
+                        x = x + 10;
+                    
+                    if(!goingRight)
+                        x = x - 10;
+
+                    //switch the goingLeft
+                    if (x == canvas.width)
+                        goingRight = false;
+
+                    if (x == 0 && !goingRight)
+                        goingRight = true;
+
+                    //draw a circle
+                    ctx.beginPath();
+                    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                
+                    //fill the circle with green color
+                    ctx.fillStyle = "#00FF00";
+                    ctx.fill();
+                }, 50);
+            }
+
+            //call the animate() function
+            animate();
+        </script>
+            
+    </body>        
+</html>

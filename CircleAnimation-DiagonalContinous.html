@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+    <body>
+			
+		<h1>Canvas Animation</h1>
+						
+        <canvas id="canvas1" width="200" height="100" style="border:1px solid #000000;">
+        </canvas>
+            
+        <script>
+            var canvas = document.getElementById("canvas1");
+            var ctx = canvas.getContext("2d");
+                
+            var requestAnimationFrame = window.requestAnimationFrame ||
+                                    window.mozRequestAnimationFrame ||
+                                    window.webkitRequestAnimationFrame ||
+                                    window.msRequestAnimationFrame;
+                
+            var x = 0;
+            var y = 0;
+             
+            var framesPerSecond = 20;
+            
+            function drawCircle() {
+                
+                setTimeout(function() {
+                    
+                    requestAnimationFrame(drawCircle);
+                           
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+						   
+					// animating/drawing code goes here
+                    x = x + 10;
+                    y = y + 5;
+						   
+					//draw a cirlce
+                    ctx.beginPath();
+                    ctx.arc(x, y, 10, 0, 2 * Math.PI);
+                    ctx.stroke();
+					
+                    //fill with green color
+                    ctx.fillStyle = "#00FF00";
+                    ctx.fill();
+                           
+					//we are the end of the canvas - start again
+                    if (x == canvas.width) {
+                        x = 0;
+                        y = 0;
+                    }
+                           
+                }, 1000 / framesPerSecond); //end setTimeout
+                                                      
+            }
+            
+            drawCircle();
+        </script>
+                    
+    </body>
+        
+</html>

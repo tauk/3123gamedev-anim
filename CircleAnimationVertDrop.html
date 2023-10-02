@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+    <body>
+			
+		<h1>Canvas Animation example - moving a circle across the canvas</h1>
+			
+        <canvas id="canvas1" width="400" height="200" style="border:1px solid #000000;">
+        </canvas>
+            
+        <script>
+            const canvas = document.getElementById("canvas1");
+            const ctx = canvas.getContext("2d");
+                
+            //get the animation frame depending on the browser engine
+            const requestAnimationFrame = window.requestAnimationFrame ||
+                                        window.mozRequestAnimationFrame ||
+                                        window.webkitRequestAnimationFrame ||
+                                        window.msRequestAnimationFrame;
+
+            //set intial start x and y coordinates
+            let x = canvas.width / 2;
+            let y = 0;
+            
+            let radius = 15;
+
+            const delayBetweenFrames = 20; //the delay time is in milliseconds   
+
+            //declare the animate() function
+            function animate() {                
+                
+                setTimeout( function() {
+                    requestAnimationFrame(animate);
+
+                    //clear the whole canvas area   
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    //change the x postition
+                    y = y + 5;
+
+                    //draw a circle
+                    ctx.beginPath();
+                    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                
+                    //fill the circle with green color
+                    ctx.fillStyle = "#00FF00";
+                    ctx.fill();
+
+               }, delayBetweenFrames);
+            }
+
+            //call the animate() function
+            animate();
+        </script>
+            
+    </body>        
+</html>

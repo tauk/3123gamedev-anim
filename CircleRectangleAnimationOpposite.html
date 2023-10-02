@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+    <body>
+			
+		<h1>Canvas Animation example - moving a circle across the canvas</h1>
+			
+        <canvas id="canvas1" width="200" height="100" style="border:1px solid #000000;">
+        </canvas>
+            
+        <script>
+            var canvas = document.getElementById("canvas1");
+            var ctx = canvas.getContext("2d");
+                
+            //get the animation frame depending on the browser engine
+            var requestAnimationFrame = window.requestAnimationFrame ||
+                                        window.mozRequestAnimationFrame ||
+                                        window.webkitRequestAnimationFrame ||
+                                        window.msRequestAnimationFrame;
+
+            //set intial start x and y coordinates
+            var circleX = 0;
+            var rectangleX = canvas.width;
+            
+            var circleY = 50;
+            var rectangleY = 60;
+            
+            var radius = 15;
+
+            var delayBetweenFrames = 100; //the delay time is in milliseconds   
+
+            //declare the animate() function
+            function animate() {                
+                //use the setTimeout to do the animation between frame using the delayBetweenFrames
+                setTimeout(function() {
+
+                    //animation code goes into this anonymous function handler
+                    requestAnimationFrame(animate);
+
+                    //clear the whole canvas area   
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    //change the circle x postition
+                    circleX += 10;
+
+                    //change the rectangle y position
+                    rectangleX  -= 10;
+
+                    //draw a circle
+                    ctx.beginPath();
+                    ctx.arc(circleX, circleY, radius, 0, 2 * Math.PI);
+                
+                    //fill the circle with green color
+                    ctx.fillStyle = "#00FF00";
+                    ctx.fill();
+
+                    //draw a rectangle
+                    ctx.fillStyle = "blue";
+                    ctx.fillRect(rectangleX, rectangleY, 20, 15);
+                    
+                }, delayBetweenFrames);
+            }
+
+            //call the animate() function
+            animate();
+        </script>
+            
+    </body>        
+</html>
